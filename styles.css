@@ -1,0 +1,217 @@
+/* Shared by every page on liftmax.co.uk.
+   Lifted out of the homepage's inline <style> when the privacy policy moved
+   in from its own repo — two pages on one domain that looked like two
+   different products was the thing worth fixing, and duplicating the palette
+   into each file is how they drift apart again. */
+
+/* LiftMax "Volt" palette — values taken from src/theme/colors.ts in the app
+   repo. Dark is the brand's native mode; light is a same-hierarchy inversion.
+   The accent is a reward signal: see the note above .prescription for the
+   rule about where it is allowed to appear. */
+:root {
+  --bg: #0B0D0E;
+  --surface: #14171A;
+  --surface-raised: #1D2124;
+  --border: #2A2F33;
+  --text: #F7F9F9;
+  --text-secondary: #9AA3A8;
+  --text-muted: #5B6368;
+  --accent: #C6FF3C;
+  --accent-text: #0B0D0E;
+  --accent-soft: rgba(198, 255, 60, 0.10);
+  --accent-border: rgba(198, 255, 60, 0.35);
+  --data: #3CD7FF;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #ECEFEF;
+    --surface: #FFFFFF;
+    --surface-raised: #F7F8F8;
+    --border: #D6DBDC;
+    --text: #14171A;
+    --text-secondary: #4B5257;
+    --text-muted: #767E82;
+    /* Deepened from the dark-mode hues: neon volt reads as a highlighter
+       on a light page, and #C6FF3C on white fails AA outright. */
+    --accent: #4C7A12;
+    --accent-text: #F7F9F9;
+    --accent-soft: rgba(76, 122, 18, 0.10);
+    --accent-border: rgba(76, 122, 18, 0.35);
+    --data: #0E7FA3;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+h1, h2, .wordmark {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+}
+.wordmark {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+}
+/* The accent's first of two appearances on the homepage. */
+.wordmark span { color: var(--accent); }
+/* On the inner pages the wordmark is the way back out. */
+a.wordmark { text-decoration: none; color: var(--text); }
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero { padding: 4.5rem 0 3.5rem; }
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  margin: 0 0 1.25rem;
+  max-width: 34rem;
+}
+
+.status {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+}
+
+/* ── The prescription card ──────────────────────────────── */
+/* A concrete example beats a paragraph describing one. This is the
+   shape of the app's central output. */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+  margin: 2.5rem 0 0;
+}
+.card .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+.card .exercise {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+}
+/* Tabular figures — weights and reps are meant to be trusted at a glance. */
+.card .prescription {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  /* The accent's second and last appearance: a recommendation is exactly
+     the "earned, not hyped" moment it is reserved for. */
+  color: var(--accent);
+  margin: 0 0 0.6rem;
+}
+.card .why {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Sections ───────────────────────────────────────────── */
+section { padding: 3rem 0; border-top: 1px solid var(--border); }
+section:first-of-type { border-top: 0; }
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+}
+p { margin: 0 0 1rem; }
+p:last-child { margin-bottom: 0; }
+
+.lead { color: var(--text-secondary); }
+
+ul { padding-left: 1.15rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.55rem; color: var(--text-secondary); }
+li strong { color: var(--text); font-weight: 600; }
+li:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--text);
+  text-decoration-color: var(--accent-border);
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration-color: var(--accent); }
+
+/* ── Support ────────────────────────────────────────────── */
+.support {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+.email {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+
+/* ── Prose pages (the policy) ───────────────────────────── */
+/* The policy arrived as one long run of h2/p with no section rules, and it
+   reads better that way — a legal document is not a set of feature cards.
+   This gives it the site's type and rhythm without the dividers. */
+.prose { padding: 3rem 0 1rem; }
+.prose h1 { font-size: clamp(1.7rem, 5vw, 2.2rem); font-weight: 700; margin: 0 0 0.4rem; }
+.prose h2 { font-size: 1.2rem; margin: 2.25rem 0 0.75rem; }
+.prose p { color: var(--text-secondary); }
+.updated {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0 3rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+footer a { color: var(--text-secondary); }
+footer nav { margin-bottom: 0.75rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+@media (max-width: 30rem) {
+  body { font-size: 16px; }
+  .hero { padding: 3rem 0 2.5rem; }
+  section { padding: 2.25rem 0; }
+}

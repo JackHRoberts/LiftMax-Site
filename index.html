@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LiftMax — Strength Training</title>
+<meta name="description" content="LiftMax tells you what to lift next, based on what you actually lifted last. A strength training app that prescribes your next session from your own logged work.">
+<meta name="theme-color" content="#0B0D0E">
+
+<!-- Google Search Console domain ownership. Required so the Google Cloud OAuth
+     consent screen will accept liftmax.co.uk as an authorized domain for the
+     Drive backup sign-in — Cloud Console rejects github.io outright, because
+     it is on the Public Suffix List and so is not a domain anyone can own.
+
+     PASTE THE NEW TOKEN BELOW AND UNCOMMENT. The token that verified
+     jackhroberts.github.io does NOT carry over: Search Console issues one per
+     property, so liftmax.co.uk needs its own. Verify it as a *Domain* property
+     via DNS TXT if you can — that covers the apex, www and both schemes at
+     once — and keep this tag only if you used the URL-prefix method instead.
+     Whichever you use, it must be the same Google account that owns the Cloud
+     project, or Cloud Console will not offer the domain.
+
+<meta name="google-site-verification" content="PASTE_TOKEN_HERE">
+-->
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="LiftMax — Strength Training">
+<meta property="og:description" content="Tells you what to lift next, based on what you actually lifted last.">
+<meta property="og:url" content="https://liftmax.co.uk/">
+<meta property="og:image" content="https://liftmax.co.uk/icon.png">
+
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="canonical" href="https://liftmax.co.uk/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<!-- Relative, not root-relative, on purpose: the site has to render correctly
+     both at liftmax.co.uk and at jackhroberts.github.io/LiftMax-Site/, which
+     is the only way to preview it before DNS is pointed. -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="wordmark">Lift<span>Max</span></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <h1>Tells you what to lift next, based on what you actually lifted last.</h1>
+    <p>Most training apps are a logbook. You write down what you did, and deciding what to do
+      next is still your problem. LiftMax does that part for you.</p>
+    <p class="status">Android · in closed testing</p>
+
+    <div class="card">
+      <p class="label">Next session</p>
+      <p class="exercise">Barbell Bench Press</p>
+      <p class="prescription">82.5 kg · 3 × 8</p>
+      <p class="why">From your last 6 sessions and your estimated 1RM trend — rounded to plates
+        you told us you own.</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>How it decides</h2>
+    <p class="lead">Every set you log updates an estimated one-rep max for that exercise.
+      Prescriptions come off the trend across recent sessions rather than a single good day, so
+      one heavy session doesn't send the next one somewhere you can't follow.</p>
+    <p class="lead">It also learns how you rate effort. Reps-in-reserve judgement is a skill, and
+      most lifters under-rate what they have left — which quietly drags every prescription too
+      light. LiftMax measures your personal bias and corrects for it.</p>
+    <p class="lead">Come back after time off and it backs the load off rather than picking up
+      where you left it.</p>
+  </section>
+
+  <section>
+    <h2>Built for the gym, not the spreadsheet</h2>
+    <ul>
+      <li><strong>Weights rounded to plates you actually have.</strong> Set your bar and plate
+        inventory, and prescriptions land on loads you can build.</li>
+      <li><strong>Warm-up sets calculated</strong> before your first working set.</li>
+      <li><strong>Over 200 exercises</strong>, with your own additions alongside them, and a
+        how-to guide on every one.</li>
+      <li><strong>18 routine templates</strong> — body parts, splits, or built around the
+        equipment to hand.</li>
+      <li><strong>Per-exercise overrides</strong> when the standard progression doesn't suit a
+        lift.</li>
+      <li><strong>Personal bests and goals</strong>, and where a lift sits against general
+        strength standards.</li>
+      <li>Log past workouts you did away from the app. Kilograms or pounds.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Your data stays yours</h2>
+    <p class="lead">No account. No sign-up. No ads.</p>
+    <p class="lead">Everything you enter — your profile, workouts, routines and history — is
+      stored in a database on your own device. There is no server holding your training history,
+      because there is no server. Back up and restore to storage you control, and erase
+      everything from within the app whenever you want.</p>
+    <p class="lead">Anonymous crash reports are sent to help fix bugs. They contain technical
+      diagnostics only — never your training data. Details are in the
+      <a href="privacy/">privacy policy</a>.</p>
+  </section>
+
+  <section>
+    <h2>Support</h2>
+    <div class="support">
+      <p class="lead" style="margin-bottom:0.75rem">Questions, bug reports and feature requests
+        all go to one inbox, and a person reads them.</p>
+      <p class="email"><a href="mailto:jackroberts-dev@outlook.com">jackroberts-dev@outlook.com</a></p>
+      <p class="lead" style="margin:0.75rem 0 0; font-size:0.9rem">If you're reporting a bug, the
+        Contact Us button in the app's Settings fills in your build number automatically — that
+        makes it much easier to track down.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="privacy/">Privacy policy</a>
+      <a href="mailto:jackroberts-dev@outlook.com">Support</a>
+    </nav>
+    <p style="margin:0">LiftMax</p>
+  </div>
+</footer>
+
+</body>
+</html>
