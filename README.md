@@ -41,10 +41,15 @@ why the two sites had to merge rather than sit side by side.
   to the meta tag — it covers apex, `www` and both schemes at once. If you use
   the meta-tag method instead, there is a commented-out slot in `index.html`.
 - **Paths are relative on `index.html` and `privacy/index.html`, root-relative
-  on `404.html`.** Deliberate, and each file says why. The short version: the
-  first two must also render at `jackhroberts.github.io/LiftMax-Site/` so the
-  site can be previewed before DNS is pointed; the 404 is served at arbitrary
-  depth so it cannot use relative links.
+  on `404.html`.** Deliberate, and each file says why: the 404 is served for a
+  missing URL at any depth, so a relative href would resolve against whatever
+  the visitor mistyped.
+- **There is no preview URL while `CNAME` exists.** Pages 301s
+  `jackhroberts.github.io/LiftMax-Site/` straight to `liftmax.co.uk`, so the
+  project URL cannot be used to check the site before DNS is pointed. Delete
+  `CNAME` on a branch to preview, or open the files locally
+  (`python3 -m http.server --directory .`, noting that it will not serve
+  `404.html` for misses the way Pages does).
 - **`CNAME` is not decorative.** GitHub Pages reads it as the custom-domain
   setting. Removing the file unsets the domain.
 

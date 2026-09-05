@@ -36,9 +36,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
-<!-- Relative, not root-relative, on purpose: the site has to render correctly
-     both at liftmax.co.uk and at jackhroberts.github.io/LiftMax-Site/, which
-     is the only way to preview it before DNS is pointed. -->
+<!-- Relative, not root-relative, on purpose: this page and the policy render
+     correctly wherever the site is mounted, apex or subpath. Note that the
+     jackhroberts.github.io/LiftMax-Site/ preview URL is NOT one of those
+     places while CNAME exists — Pages 301s it to the custom domain. To
+     preview before DNS is pointed, delete CNAME on a branch, or just open
+     the files locally. -->
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
