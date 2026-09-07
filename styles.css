@@ -76,7 +76,9 @@ header {
   font-weight: 700;
   margin: 0;
 }
-/* The accent's first of two appearances on the homepage. */
+/* The accent's first appearance on the homepage. The static page has two;
+   the live demo adds the slider thumb and the "too easy" grade, both of
+   which are making the same claim the accent is reserved for. */
 .wordmark span { color: var(--accent); }
 /* On the inner pages the wordmark is the way back out. */
 a.wordmark { text-decoration: none; color: var(--text); }
@@ -136,8 +138,9 @@ a.wordmark { text-decoration: none; color: var(--text); }
   font-weight: 500;
   font-size: 1.5rem;
   font-variant-numeric: tabular-nums;
-  /* The accent's second and last appearance: a recommendation is exactly
-     the "earned, not hyped" moment it is reserved for. */
+  /* The accent's second appearance, and the last one on the page as it
+     renders without JavaScript: a recommendation is exactly the "earned,
+     not hyped" moment it is reserved for. */
   color: var(--accent);
   margin: 0 0 0.6rem;
 }
@@ -214,4 +217,349 @@ footer nav { margin-bottom: 0.75rem; display: flex; gap: 1.25rem; flex-wrap: wra
   body { font-size: 16px; }
   .hero { padding: 3rem 0 2.5rem; }
   section { padding: 2.25rem 0; }
+}
+
+/* ══ Additions: the live demo, the charts, the screenshots ═══════════
+   Everything below follows the two palette rules the top of this file
+   sets out. The accent stays a reward signal — on this page that is the
+   wordmark and the prescription, and nothing new below claims it except
+   the "too easy" grade, which is the one place the demo is saying the
+   same thing the accent already means: you had more in you, so the load
+   goes up. Data gets --data (Signal Cyan), which the palette has always
+   defined and nothing used until there was a chart to draw. */
+
+h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 2rem 0 0.75rem;
+}
+
+/* ── The live demo ──────────────────────────────────────────────── */
+/* The panel is hidden until demo.js reveals it, so a JS-off visitor sees
+   the static card exactly as it was rather than a set of dead inputs. */
+.demo-panel {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+/* Scoped to .demo-panel, not left as a bare class: these are <p> inside
+   .hero, whose own `.hero p` rule is more specific than a lone class and was
+   rendering both of them at the hero's 1.15rem lead size. */
+.demo-panel .demo-lede {
+  font-size: 0.9rem;
+  max-width: none;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+}
+
+.demo-sessions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.demo-sessions li {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr 1fr 1.6fr;
+  gap: 0.5rem;
+  align-items: end;
+  margin: 0;
+  color: inherit;
+}
+.sess-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding-bottom: 0.55rem;
+}
+
+/* One field shape for every control in the demo. */
+.sess-f { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+.sess-f > span {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.sess-f input[type="number"],
+.sess-f select {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.5rem;
+  width: 100%;
+  min-width: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.sess-f select {
+  /* Room for the caret drawn below; kept off `background` so the surface
+     token stays the single source of the fill. */
+  padding-right: 1.6rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+                    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position: right 0.75rem center, right 0.55rem center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.sess-f input:focus-visible,
+.sess-f select:focus-visible {
+  outline: 2px solid var(--accent-border);
+  outline-offset: 1px;
+  border-color: var(--accent-border);
+}
+
+.demo-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.demo-days { grid-column: 1 / -1; }
+.demo-days output {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.demo-days input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  margin: 0.15rem 0 0;
+}
+
+/* ── The demo's working ─────────────────────────────────────────── */
+.demo-working {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.demo-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.demo-chart .trend-line { fill: none; stroke: var(--data); stroke-width: 2; stroke-linejoin: round; }
+.demo-chart .dot { fill: var(--data); }
+/* Hollow: a lower bound the engine inferred, not a measurement it trusts. */
+.demo-chart .dot-floored { fill: var(--surface-raised); stroke: var(--data); stroke-width: 2; }
+.demo-chart .basis-line {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.demo-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.demo-steps li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.15rem 0.5rem;
+  margin: 0;
+  color: inherit;
+}
+.step-in {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+.step-out {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  text-align: right;
+}
+.step-out em { font-style: normal; font-size: 0.68rem; color: var(--text-muted); }
+.step-grade {
+  grid-column: 1 / -1;
+  justify-self: start;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+}
+/* The one new place the accent is allowed: "you had more in you" is the
+   same claim the accent already makes everywhere else on the page. */
+.step-grade[data-grade="too_easy"] {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+}
+
+.demo-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  margin: 1rem 0 0;
+}
+.demo-facts .fact-wide { grid-column: 1 / -1; }
+.demo-facts dt {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.demo-facts dd {
+  margin: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+/* Only an increase earns the accent — same rule as everywhere else. */
+.trend-chip[data-trend="increase_big"],
+.trend-chip[data-trend="increase_normal"] { color: var(--accent); }
+
+.demo-panel .demo-note {
+  font-size: 0.78rem;
+  max-width: none;
+  color: var(--text-muted);
+  margin: 1rem 0 0;
+  line-height: 1.55;
+}
+
+/* ── Standalone charts (the layoff curve) ───────────────────────── */
+.chart {
+  margin: 1.5rem 0 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.chart svg { display: block; width: 100%; height: auto; }
+.chart .grid line { stroke: var(--border); stroke-width: 1; }
+.chart .curve {
+  fill: none;
+  stroke: var(--data);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart .pt { fill: var(--data); }
+.chart text {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  fill: var(--text-muted);
+}
+.chart .axis-y text { text-anchor: end; }
+.chart figcaption {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+/* ── Screenshots ────────────────────────────────────────────────── */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.shots figure { margin: 0; }
+.shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.shots figcaption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+}
+
+/* ── Feature insets ─────────────────────────────────────────────── */
+.insets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.inset {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+.inset-h { font-weight: 600; margin: 0 0 0.6rem; }
+.inset-b { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.75rem; }
+.inset-b:last-child { margin-bottom: 0; }
+.inset-quiet { font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.grid-list { list-style: none; padding: 0; margin: 0 0 0.75rem; }
+.grid-list li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--border);
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.grid-list li:first-child { border-top: 0; }
+.grid-list .out { color: var(--text); font-size: 0.95rem; min-width: 2.75rem; text-align: right; }
+
+/* A pin stack, last pin marked — the ceiling the prescription stops at. */
+.stack { display: flex; gap: 3px; margin: 0 0 0.75rem; }
+.stack span {
+  flex: 1;
+  height: 1.5rem;
+  border-radius: 3px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+.stack .pin-last {
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+}
+
+/* ── Narrow screens ─────────────────────────────────────────────── */
+@media (max-width: 46rem) {
+  .shots { grid-template-columns: 1fr; gap: 1.75rem; max-width: 22rem; }
+  .insets { grid-template-columns: 1fr; }
+  .demo-working { grid-template-columns: 1fr; }
+}
+@media (max-width: 30rem) {
+  /* The three fields stop fitting on one line well before the page does. */
+  .demo-sessions li {
+    grid-template-columns: 1.25rem 1fr 1fr;
+    grid-template-areas: "n w r" ". e e";
+    gap: 0.5rem 0.5rem;
+  }
+  .demo-sessions .sess-n { grid-area: n; }
+  .demo-sessions .sess-rir { grid-area: e; }
+  .demo-opts { grid-template-columns: 1fr; }
+  .demo-facts { grid-template-columns: 1fr; }
 }

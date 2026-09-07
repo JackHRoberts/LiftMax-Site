@@ -9,6 +9,8 @@ index.html          homepage
 privacy/index.html  privacy policy  →  https://liftmax.co.uk/privacy/
 404.html            served for any missing path
 styles.css          shared by all three
+demo.js             the homepage's live prescription demo — see below
+shots/              app screenshots, webp, from the app repo's store assets
 CNAME               the custom domain; deleting it unsets it in Pages
 favicon.png         196×196, from the app repo's assets/
 icon.png            1024×1024, used as the og:image
@@ -52,6 +54,25 @@ why the two sites had to merge rather than sit side by side.
   `404.html` for misses the way Pages does).
 - **`CNAME` is not decorative.** GitHub Pages reads it as the custom-domain
   setting. Removing the file unsets the domain.
+- **`demo.js` is a port of the app's engine, not an impression of one.** Every
+  constant and formula in it comes from `src/engine/{progression,layoff,warmup}.ts`
+  in the app repo, and each is commented with the function it came from. The
+  whole value of the thing is that a visitor dragging those controls is running
+  the real arithmetic — so if the engine's numbers move (`GOAL_SCHEMES`,
+  `EQUIPMENT_INCREMENTS`, `TREND_PCT_ADJUST`, the layoff constants, the Epley
+  constant), this file has to move with them or the site is quietly lying. It
+  deliberately omits the parts that need history the demo hasn't got: the
+  per-lift rep-max curve and the reps-in-reserve bias both sit at their
+  population defaults, and the page says so.
+- **The static card and the demo's defaults have to agree.** `index.html` ships
+  the prescription card filled in (82.5 kg · 4 × 8), which is what a visitor
+  with JavaScript off sees and what `demo.js` computes from the three sessions
+  hard-coded in the markup. Change one and the other has to change with it,
+  or the card will visibly rewrite itself on load.
+- **Prescriptions round to the *nearest* loadable step, not down.**
+  `prescribeForTarget` uses `roundToPlate`; `floorToPlate` is only for weights
+  *displayed* as estimates. The site said "rounded down" in two places and was
+  wrong about it; if that wording comes back, check the engine first.
 
 ## DNS
 

@@ -60,12 +60,95 @@
       next is still your problem. LiftMax does that part for you.</p>
     <p class="status">Android · in closed testing</p>
 
-    <div class="card">
+    <!-- The prescription card, and with JavaScript the live demo of it.
+         demo.js reveals [data-js-only] and takes over every [data-out-*] node;
+         with JS off, what is written below is what the page shows, and those
+         values are exactly what the demo computes at its own defaults. Keep
+         the two in step if the defaults ever change. -->
+    <div class="card demo" id="demo">
       <p class="label">Next session</p>
       <p class="exercise">Barbell Bench Press</p>
-      <p class="prescription">82.5 kg · 3 × 8</p>
-      <p class="why">From your last 6 sessions and your estimated 1RM trend — rounded down to a
-        load you can actually build.</p>
+      <p class="prescription" data-out-prescription>82.5 kg · 4 × 8</p>
+      <p class="why" data-out-why>From your last 3 sessions and your estimated 1RM trend —
+        rounded to a load you can actually build.</p>
+
+      <div class="demo-panel" data-js-only hidden>
+        <p class="demo-lede">These are the sessions it is reading. Change them and watch the
+          prescription move.</p>
+
+        <ol class="demo-sessions">
+          <li data-session>
+            <span class="sess-n">1</span>
+            <label class="sess-f"><span>kg</span>
+              <input type="number" data-weight value="77.5" step="0.5" min="0" max="500" inputmode="decimal"></label>
+            <label class="sess-f"><span>reps</span>
+              <input type="number" data-reps value="8" step="1" min="1" max="30" inputmode="numeric"></label>
+            <label class="sess-f sess-rir"><span>in reserve</span>
+              <select data-rir>
+                <option value="4">4+</option><option value="3" selected>3</option>
+                <option value="2">2</option><option value="1">1</option><option value="0">0</option>
+              </select></label>
+          </li>
+          <li data-session>
+            <span class="sess-n">2</span>
+            <label class="sess-f"><span>kg</span>
+              <input type="number" data-weight value="80" step="0.5" min="0" max="500" inputmode="decimal"></label>
+            <label class="sess-f"><span>reps</span>
+              <input type="number" data-reps value="8" step="1" min="1" max="30" inputmode="numeric"></label>
+            <label class="sess-f sess-rir"><span>in reserve</span>
+              <select data-rir>
+                <option value="4">4+</option><option value="3">3</option>
+                <option value="2" selected>2</option><option value="1">1</option><option value="0">0</option>
+              </select></label>
+          </li>
+          <li data-session>
+            <span class="sess-n">3</span>
+            <label class="sess-f"><span>kg</span>
+              <input type="number" data-weight value="82.5" step="0.5" min="0" max="500" inputmode="decimal"></label>
+            <label class="sess-f"><span>reps</span>
+              <input type="number" data-reps value="8" step="1" min="1" max="30" inputmode="numeric"></label>
+            <label class="sess-f sess-rir"><span>in reserve</span>
+              <select data-rir>
+                <option value="4">4+</option><option value="3">3</option>
+                <option value="2" selected>2</option><option value="1">1</option><option value="0">0</option>
+              </select></label>
+          </li>
+        </ol>
+
+        <div class="demo-opts">
+          <label class="sess-f"><span>Goal</span>
+            <select data-goal>
+              <option value="hypertrophy" selected>Hypertrophy</option>
+              <option value="strength">Strength</option>
+              <option value="general">General</option>
+            </select></label>
+          <label class="sess-f"><span>Equipment</span>
+            <select data-equipment>
+              <option value="barbell" selected>Barbell</option>
+              <option value="dumbbell">Dumbbell</option>
+              <option value="machine">Machine</option>
+              <option value="kettlebell">Kettlebell</option>
+            </select></label>
+          <label class="sess-f demo-days"><span>Days since you last trained it — <output data-days-out>trained recently</output></span>
+            <input type="range" data-days min="0" max="56" value="0" step="1"></label>
+        </div>
+
+        <div class="demo-working">
+          <div class="demo-chart" data-out-chart></div>
+          <ul class="demo-steps" data-out-steps></ul>
+        </div>
+
+        <dl class="demo-facts">
+          <div><dt>Estimated max</dt><dd data-out-basis></dd></div>
+          <div><dt>Trend</dt><dd class="trend-chip" data-out-trend></dd></div>
+          <div class="fact-wide"><dt>Warm-up</dt><dd data-out-warmup></dd></div>
+        </dl>
+
+        <p class="demo-note">Running the app's own formulas, not a mock-up of them. Two
+          simplifications: each session here is summarised by one set where the app grades every
+          set you log, and the per-lift personalisation — your rep-max curve, your reps-in-reserve
+          bias — needs more history than three sessions, so it sits at the population default.</p>
+      </div>
     </div>
   </div>
 
@@ -73,22 +156,117 @@
     <h2>How it decides</h2>
     <p class="lead">Every set you log updates an estimated one-rep max for that exercise.
       Prescriptions come off the trend across recent sessions rather than a single good day, so
-      one heavy session doesn't send the next one somewhere you can't follow.</p>
+      one heavy session doesn't send the next one somewhere you can't follow. The newest session
+      carries four sevenths of the answer, the one before it two, the one before that one — no
+      single rating can ever be more than about half of it.</p>
     <p class="lead">It also learns how you rate effort. Reps-in-reserve judgement is a skill, and
       most lifters under-rate what they have left — which quietly drags every prescription too
       light. LiftMax measures your personal bias and corrects for it.</p>
-    <p class="lead">Come back after time off and it backs the load off rather than picking up
-      where you left it.</p>
+
+    <h3>Come back after time off and it backs the load off</h3>
+    <p class="lead">Not by waiting for you to prove the loss with a bad session — by the calendar,
+      before you lift. Under ten days nothing happens, because strength is the slowest thing to
+      decay and a holiday costs almost nothing. Past six weeks it stops scaling, because the loss
+      is no longer predictable from time alone and your next few sessions are better evidence
+      than any curve.</p>
+
+    <!-- The real layoffReduction() curve from src/engine/layoff.ts, drawn to
+         scale: flat below LAYOFF_MIN_DAYS, a step to LAYOFF_MIN_REDUCTION at
+         exactly day 10, linear to LAYOFF_MAX_REDUCTION at LAYOFF_FULL_DAYS,
+         flat after. The step is the interesting part and is deliberately not
+         smoothed away. Static SVG so it survives with JS off. -->
+    <figure class="chart">
+      <svg viewBox="0 0 560 210" role="img"
+           aria-label="How much weight comes off, by days since you last trained the exercise. Nothing below ten days; a step to ten percent at day ten; rising to twenty percent at six weeks, then flat.">
+        <g class="grid">
+          <line x1="44" y1="170" x2="548" y2="170"></line>
+          <line x1="44" y1="106.4" x2="548" y2="106.4"></line>
+          <line x1="44" y1="42.7" x2="548" y2="42.7"></line>
+        </g>
+        <g class="axis-y">
+          <text x="36" y="174">0%</text>
+          <text x="36" y="110">10%</text>
+          <text x="36" y="47">20%</text>
+        </g>
+        <path class="curve" d="M44,170 L132.6,170 L132.6,106.4 L416,42.7 L548,42.7"></path>
+        <circle class="pt" cx="132.6" cy="106.4" r="4"></circle>
+        <circle class="pt" cx="416" cy="42.7" r="4"></circle>
+        <g class="axis-x">
+          <text x="44" y="192" text-anchor="start">0</text>
+          <text x="132.6" y="192" text-anchor="middle">10 days</text>
+          <text x="416" y="192" text-anchor="middle">6 weeks</text>
+        </g>
+      </svg>
+      <figcaption>Across the bottom, days since you last trained that exercise; up the side, how
+        much comes off the estimate before the next prescription is priced. The reduction is
+        applied to the estimate, not the finished weight, so the plate rounding and your goal's
+        own percentage band still do their usual jobs against a basis that admits time has
+        passed. There is no counter ramping it back out — the reduced session writes its own
+        estimate, so a lifter who was genuinely detrained climbs back gradually and one who
+        handled it easily rebounds almost at once.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>What it looks like</h2>
+    <div class="shots">
+      <figure>
+        <img src="shots/01-prescription.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The Barbell Bench Press screen. A target of 3 sets of 3 at 80 kg, under a heading that reads WHY, with three reasons given: start with 2 in reserve and work down to 1 by set 3; a planned deload week, because work has been accumulating for several weeks; and 3 sets instead of 5 with the weight roughly held, since cutting volume is what sheds fatigue. Below it a suggested warm-up of 32.5 kg for 5, 47.5 kg for 3 and 65 kg for 2, then the weight and reps to log.">
+        <figcaption>The prescription, and why it is that.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/02-strength-trend.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The strength trend screen: an estimated one-rep max of 100 kg with the run of sessions it was built from — 90, 92.5, 95, 95, 97.5, 100 — a predicted 8-rep max of 77.5 kg, and a strength-level bar placing the lift at Intermediate, 22.5 kg short of Advanced.">
+        <figcaption>The trend behind it, and where the lift sits.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/04-exercise-library.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The exercise library: a search box, filter chips for each body part, a button to add a custom exercise, and a list of exercises each showing its muscle group, with a how-to guide and an edit control beside it.">
+        <figcaption>Over 200 exercises, plus your own.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section>
     <h2>Built for the gym, not the spreadsheet</h2>
+
+    <!-- The three items worth showing rather than stating. roundToPlate at
+         each equipment's own increment, from EQUIPMENT_INCREMENTS — the
+         numbers below are what the app actually returns for a model weight of
+         83.7 kg, not illustrative ones. -->
+    <div class="insets">
+      <div class="inset">
+        <p class="inset-h">Weights you can actually load.</p>
+        <p class="inset-b">The model asks for <span class="mono">83.7 kg</span>. What you get
+          depends on what the weight is made of:</p>
+        <ul class="grid-list">
+          <li><span>Barbell</span><span class="mono">2.5 kg steps</span><span class="mono out">82.5</span></li>
+          <li><span>Dumbbell</span><span class="mono">2 kg steps</span><span class="mono out">84</span></li>
+          <li><span>Kettlebell</span><span class="mono">4 kg steps</span><span class="mono out">84</span></li>
+          <li><span>Pin stack</span><span class="mono">5 kg steps</span><span class="mono out">85</span></li>
+        </ul>
+        <p class="inset-b">A pound gym gets its own table, not a conversion of this one — 2.5 kg
+          is 5.5 lb, and no barbell anywhere makes that.</p>
+      </div>
+
+      <div class="inset">
+        <p class="inset-h">Knows when a lift has run out of room.</p>
+        <p class="inset-b">Mark the top of the rack or the last pin on the stack, and it stops
+          prescribing past what the equipment holds — and says so, rather than letting the weight
+          sit still for weeks looking like a plateau.</p>
+        <div class="stack" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span class="pin-last"></span>
+        </div>
+        <p class="inset-b inset-quiet">“This is the most weight you've said this exercise can be
+          loaded to, so it stays there — add reps or find a heavier setup to keep progressing.”</p>
+      </div>
+    </div>
+
     <ul>
-      <li><strong>Weights you can actually load.</strong> Prescriptions are rounded down to a
-        sensible step for that equipment, never a number you can't make.</li>
-      <li><strong>Knows when a lift has run out of room.</strong> Mark the top of the rack or the
-        last pin on the stack, and it stops prescribing past what the equipment holds.</li>
-      <li><strong>Warm-up sets calculated</strong> before your first working set.</li>
+      <li><strong>Warm-up sets calculated</strong> before your first working set — a three-rung
+        ramp onto the same plate grid, and nothing at all below a load that doesn't need one.</li>
       <li><strong>Over 200 exercises</strong>, with your own additions alongside them, and a
         how-to guide on every one.</li>
       <li><strong>18 routine templates</strong> — body parts, splits, or built around the
@@ -137,5 +315,6 @@
   </div>
 </footer>
 
+<script src="demo.js" defer></script>
 </body>
 </html>
