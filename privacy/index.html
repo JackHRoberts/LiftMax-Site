@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LiftMax Privacy Policy</title>
-<meta name="description" content="What data the LiftMax strength training app handles, and what it doesn't. Stored on your device; backed up to your own Google Drive only if you turn it on.">
+<meta name="description" content="What data the LiftMax strength training app handles, and what it doesn't. Stored on your device; backed up to your own Google Drive or iCloud only if you turn it on.">
 <meta name="theme-color" content="#0B0D0E">
 
 <meta property="og:type" content="website">
@@ -22,12 +22,14 @@
 </head>
 <body>
 
-<!-- ── The policy text below is carried over byte for byte from the
-     LiftMax-Privacy repo, deliberately. It is the document Play Console's
-     data-safety declaration is written against (see docs/play-data-safety.md
-     in the app repo), so the two have to keep agreeing with each other.
-     Presentation moved onto the site's stylesheet; not one word of the policy
-     changed with it. ─────────────────────────────────────────────────── -->
+<!-- ── The policy text below came over byte for byte from the LiftMax-Privacy
+     repo, and stayed that way until iOS. It is the document both store
+     declarations are written against — docs/play-data-safety.md and
+     docs/app-privacy.md in the app repo — so the three have to keep agreeing
+     with each other. Presentation moved onto the site's stylesheet without
+     touching a word; the September 2026 edit is the first change to the text
+     itself, and it exists because the app now backs up to iCloud on iOS and
+     this document named only Google. ──────────────────────────────────── -->
 
 <header>
   <div class="wrap">
@@ -38,7 +40,7 @@
 <main class="wrap">
   <div class="prose">
     <h1>LiftMax Privacy Policy</h1>
-    <p class="updated">Last updated: September 5, 2026</p>
+    <p class="updated">Last updated: September 8, 2026</p>
 
 <p>LiftMax is a workout tracking app. This policy explains what data the app handles and, just as
 important, what it doesn't.</p>
@@ -48,31 +50,36 @@ important, what it doesn't.</p>
 exercises, routines, and history &mdash; is stored in a local database on your device. The app has
 no user accounts and no sign-up. We (the developer) have no way to see, access, or recover this
 data, and it is never included in the crash reports described below.</p>
-<p>It stays on your device unless you switch on backup to Google Drive, which is described next.
-Nothing is uploaded until you ask for it.</p>
+<p>It stays on your device unless you switch on cloud backup, which is described next. Nothing is
+uploaded until you ask for it.</p>
 
-<h2>Backing up to your Google Drive</h2>
-<p>LiftMax can copy your data to your own Google Drive, so that a lost or replaced phone doesn't
-mean starting over. This is <strong>off until you turn it on</strong>: nothing leaves your device
-until you connect a Google Account, and the app asks you to confirm what will be uploaded before it
-does.</p>
+<h2>Backing up to your own cloud</h2>
+<p>LiftMax can copy your data to cloud storage you already own, so that a lost or replaced phone
+doesn't mean starting over. Which cloud depends on your device: <strong>Android backs up to your own
+Google Drive, and iPhone and iPad back up to your own iCloud</strong>. You are never asked to sign
+up for anything new.</p>
+<p>This is <strong>off until you turn it on</strong>. Nothing leaves your device until you switch
+backup on &mdash; on Android that means connecting a Google Account, and on iOS it uses the iCloud
+your device is already signed into &mdash; and either way the app asks you to confirm what will be
+uploaded before it does.</p>
 <p>If you switch it on, the copy contains the same information listed above &mdash; your profile,
 workouts, exercises, routines and history. It is sent over an encrypted (HTTPS) connection to a
-private folder in your own Google Drive, on your own storage. That folder is a hidden
-application-data folder: it is not visible when you browse your Drive, no other app can read it, and
-LiftMax cannot see or ask to see anything else in your Drive. There is no LiftMax server involved,
-and no copy is kept anywhere else &mdash; the data goes from your phone to your Google Account and
-nowhere in between.</p>
+private folder in your own Google Drive or iCloud, on your own storage. That folder is a hidden
+application-data folder: it is not visible when you browse your Drive or iCloud, no other app can
+read it, and LiftMax cannot see or ask to see anything else in your account. There is no LiftMax
+server involved, and no copy is kept anywhere else &mdash; the data goes from your device to your
+own account and nowhere in between.</p>
 <p>You can optionally turn on end-to-end encryption, which scrambles the backup on your phone before
-it is sent, using a key held only on that device. With it on, the file in your Drive cannot be read
-by Google, by us, or by anyone who reaches it &mdash; only by someone who has your key. The key is
-never uploaded, which also means that losing both your key and your phone makes the backup
-permanently unreadable. The app says so when you switch it on.</p>
-<p>You are in control of the copy. You can disconnect your Google Account, delete the backup from
-your Drive from within the app at any time, or turn automatic backup off. Uninstalling LiftMax
-causes Google to delete the application-data folder along with the app. Your Google Account and
-Drive are governed by <a href="https://policies.google.com/privacy">Google's own privacy
-policy</a>.</p>
+it is sent, using a key held only on that device. With it on, the file in your Drive or iCloud
+cannot be read by Google, by Apple, by us, or by anyone who reaches it &mdash; only by someone who
+has your key. The key is never uploaded, which also means that losing both your key and your phone
+makes the backup permanently unreadable. The app says so when you switch it on.</p>
+<p>You are in control of the copy. You can delete the backup from within the app at any time, or
+turn automatic backup off. On Android you can also disconnect your Google Account; on iOS there is
+no separate account to disconnect, because backup uses the iCloud your device is already signed
+into. Your Google Account and Drive are governed by
+<a href="https://policies.google.com/privacy">Google's own privacy policy</a>, and your iCloud by
+<a href="https://www.apple.com/legal/privacy/">Apple's own privacy policy</a>.</p>
 
 <h2>Crash and error reporting</h2>
 <p>LiftMax uses <a href="https://sentry.io">Sentry</a>, a third-party error-monitoring service, to
@@ -95,18 +102,20 @@ contact us at the address below and we will delete it.</p>
 
 <h2>Data sharing</h2>
 <p>Your training data is never shared with anyone. If you turn on backup it is sent to your own
-Google Drive, at your instruction and to storage you already own &mdash; it is not passed to us or
-to any third party for their own purposes, and there is no LiftMax server that could receive it.
-Crash diagnostics (described above) are shared only with Sentry, and only for the purpose of
-debugging. Nothing is ever sold, and nothing is used for advertising.</p>
+Google Drive or iCloud, at your instruction and to storage you already own &mdash; it is not passed
+to us or to any third party for their own purposes, and there is no LiftMax server that could
+receive it. Crash diagnostics (described above) are shared only with Sentry, and only for the
+purpose of debugging. Nothing is ever sold, and nothing is used for advertising.</p>
 
 <h2>Data deletion</h2>
 <p>You can erase everything from inside the app, or delete all app data by removing the app from
 your device &mdash; uninstalling LiftMax permanently removes your local database along with it.</p>
-<p>If you have backed up to Google Drive, the app has a "Delete Backup from Drive" action that
-removes the copy from your Google Account. Uninstalling also causes Google to delete the
-application-data folder the backup lives in. Deletion of crash diagnostics is covered in the section
-above.</p>
+<p>If you have backed up, the app has a "Delete Backup from Drive" action &mdash; "Delete Backup
+from iCloud" on iPhone and iPad &mdash; that removes the copy from your own account. On Android,
+uninstalling LiftMax also causes Google to delete the application-data folder the backup lives in.
+On iOS it does not: removing the app leaves the copy in your iCloud storage, where you can delete it
+from your device's iCloud storage settings, so delete it from inside the app first if you want it
+gone. Deletion of crash diagnostics is covered in the section above.</p>
 
 <h2>Children's privacy</h2>
 <p>LiftMax does not knowingly collect personal information from anyone, including children.
