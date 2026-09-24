@@ -29,6 +29,67 @@
 <meta property="og:url" content="https://liftmax.co.uk/">
 <meta property="og:image" content="https://liftmax.co.uk/icon.png">
 
+<!-- Structured data. Renders nothing; it exists so a crawler does not have to
+     infer from prose what this page is. That inference is the whole problem
+     here: "LiftMax" is also an industrial rigging brand on liftmax.com and two
+     unrelated UK companies, so left to guess, Google can reasonably file this
+     under lifting equipment.
+
+     sameAs is the load-bearing part — it asserts that this site and the two
+     store listings are one entity rather than three pages sharing a word.
+     Google already asserts the other half from its side: the Play listing's
+     own JSON-LD carries author.url pointing back here, and Apple's seller URL
+     does the same. This closes the loop.
+
+     Every value below is mirrored from the live store listings (Play:
+     HEALTH_AND_FITNESS, free; Apple: Health & Fitness, free, 4+). Google
+     cross-checks structured data against the visible page and the things it
+     links to, so if the app's category or price ever changes, change it here
+     too — disagreeing copies are worse than none.
+
+     Deliberately no aggregateRating: both stores report zero ratings so far,
+     and inventing one is exactly the kind of invalid markup that gets rich
+     results revoked. Add it only when there are real ratings to report. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://liftmax.co.uk/#app",
+      "name": "LiftMax",
+      "description": "Tells you what to lift next, based on what you actually lifted last. A strength training app that prescribes your next session from your own logged work.",
+      "applicationCategory": "HealthApplication",
+      "applicationSubCategory": "Strength Training",
+      "operatingSystem": "Android, iOS",
+      "url": "https://liftmax.co.uk/",
+      "image": "https://liftmax.co.uk/icon.png",
+      "author": {
+        "@type": "Person",
+        "name": "Jack Roberts",
+        "url": "https://liftmax.co.uk/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "sameAs": [
+        "https://play.google.com/store/apps/details?id=com.liftmax.android",
+        "https://apps.apple.com/app/liftmax/id6809827285"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://liftmax.co.uk/#website",
+      "name": "LiftMax",
+      "url": "https://liftmax.co.uk/",
+      "about": { "@id": "https://liftmax.co.uk/#app" }
+    }
+  ]
+}
+</script>
+
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="canonical" href="https://liftmax.co.uk/">
 
