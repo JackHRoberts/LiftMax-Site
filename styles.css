@@ -98,16 +98,6 @@ a.wordmark { text-decoration: none; color: var(--text); }
   max-width: 34rem;
 }
 
-.status {
-  display: inline-block;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.3rem 0.85rem;
-}
-
 /* ── The prescription card ──────────────────────────────── */
 /* A concrete example beats a paragraph describing one. This is the
    shape of the app's central output. */
@@ -562,4 +552,55 @@ h3 {
   .demo-sessions .sess-rir { grid-area: e; }
   .demo-opts { grid-template-columns: 1fr; }
   .demo-facts { grid-template-columns: 1fr; }
+}
+
+/* ── Store badges ───────────────────────────────────────────────────
+   Apple's and Google's official artwork, self-hosted rather than
+   hotlinked, as both sets of brand guidelines ask.
+
+   Sizing is done on the artwork inside each badge, not on the files,
+   because the two are drawn differently: Google's PNG bakes its required
+   clear space into the canvas (a 41px inset on a 250px-tall image, so the
+   badge itself is only 67.2% of the file), while Apple's SVG is the badge
+   edge to edge and needs its clear space added here. Both end up 44px of
+   visible badge in a 66px box, which is what keeps them on a shared
+   baseline at a matching weight. If either file is ever re-downloaded,
+   re-check that inset before trusting these numbers. */
+.get {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+}
+/* No border, background or hover tint: the badges are fixed artwork that
+   the guidelines forbid decorating, so the link is the badge itself. */
+.store { display: block; text-decoration: none; }
+.store img { display: block; width: auto; }
+
+.store-play img { height: 66px; }
+
+/* 11px all round is Apple's 10%-of-height clear space, and lands the
+   badge at the same 66px box height as Google's padded canvas. */
+.store-apple { padding: 11px; }
+.store-apple img { height: 44px; }
+
+/* The artwork carries no focus styling of its own. */
+.store:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* At full size the pair measures ~340px, against 342px of content width on a
+   390px phone. Two pixels of slack is not slack, so the badges step down here
+   to 40px of visible badge — Apple's stated minimum height, and the floor this
+   row is allowed to reach. That leaves the pair at ~300px, comfortably inside
+   the gutter. If they ever need to be bigger, let the row wrap instead of
+   going under 40. */
+@media (max-width: 30rem) {
+  .get { gap: 0.25rem; }
+  .store-play img { height: 60px; }
+  .store-apple { padding: 10px; }
+  .store-apple img { height: 40px; }
 }
