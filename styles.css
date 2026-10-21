@@ -83,6 +83,18 @@ header {
 /* On the inner pages the wordmark is the way back out. */
 a.wordmark { text-decoration: none; color: var(--text); }
 
+/* The homepage's header carries in-page links beside the wordmark. */
+header .wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.top-nav { display: flex; gap: 1.25rem; font-size: 0.9rem; }
+.top-nav a { color: var(--text-secondary); text-decoration: none; }
+.top-nav a:hover { color: var(--text); }
+
 /* ── Hero ───────────────────────────────────────────────── */
 .hero { padding: 4.5rem 0 3.5rem; }
 .hero h1 {
@@ -97,6 +109,13 @@ a.wordmark { text-decoration: none; color: var(--text); }
   margin: 0 0 1.25rem;
   max-width: 34rem;
 }
+
+.hero .hero-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+.hero-note a { color: var(--text-secondary); }
 
 /* ── The prescription card ──────────────────────────────── */
 /* A concrete example beats a paragraph describing one. This is the
@@ -535,9 +554,71 @@ h3 {
   border-color: var(--accent-border);
 }
 
+/* ── LiftMax Pro ────────────────────────────────────────────────── */
+/* Pro gets --data, not the accent: the accent is the reward signal (see
+   the top of this file), and a product being on sale is not one. Cyan is
+   the palette's "analysis" colour, which is most of what Pro is. */
+.pro h2 span { color: var(--data); }
+.pro-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 600;
+  color: var(--data);
+  border: 1px solid var(--data);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  margin: 0 0 0.9rem;
+}
+.pro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.75rem 0 1rem;
+}
+.pro-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+/* Programs (the headline) and MaxStats (the most to say) take a full row
+   each; the two in-context features share the last one. */
+.pro-card-wide { grid-column: 1 / -1; }
+.pro-h {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+}
+.pro-b { font-size: 0.9rem; color: var(--text-secondary); margin: 0 0 0.75rem; }
+.pro-b:last-child { margin-bottom: 0; }
+.pro-quiet { font-size: 0.82rem; color: var(--text-muted); }
+.pro-points { margin: 0; font-size: 0.88rem; }
+.pro-points li { margin-bottom: 0.35rem; }
+.free-note {
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
 /* ── Narrow screens ─────────────────────────────────────────────── */
 @media (max-width: 46rem) {
-  .shots { grid-template-columns: 1fr; gap: 1.75rem; max-width: 22rem; }
+  /* Six stacked full-width phones is a lot of scrolling; a sideways strip
+     keeps the set to one screen's height, with the next shot peeking in to
+     say there is more. Bleeds to the screen edge, padded back to the gutter. */
+  .shots {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem 0.5rem;
+    scroll-padding: 0 1.5rem;
+  }
+  .shots figure { flex: 0 0 62%; max-width: 15rem; scroll-snap-align: start; }
+  .pro-grid { grid-template-columns: 1fr; }
   .insets { grid-template-columns: 1fr; }
   .demo-working { grid-template-columns: 1fr; }
 }

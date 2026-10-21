@@ -110,6 +110,11 @@
 <header>
   <div class="wrap">
     <p class="wordmark">Lift<span>Max</span></p>
+    <nav class="top-nav" aria-label="On this page">
+      <a href="#how">How it works</a>
+      <a href="#pro">Pro</a>
+      <a href="#support">Support</a>
+    </nav>
   </div>
 </header>
 
@@ -127,6 +132,8 @@
         <img src="badges/app-store.svg" alt="Download on the App Store" width="120" height="40">
       </a>
     </div>
+    <p class="hero-note">Free to download, with no account and no ads.
+      <a href="#pro">LiftMax Pro</a>, a one-off unlock, is coming soon.</p>
 
     <!-- The prescription card, and with JavaScript the live demo of it.
          demo.js reveals [data-js-only] and takes over every [data-out-*] node;
@@ -220,7 +227,7 @@
     </div>
   </div>
 
-  <section>
+  <section id="how">
     <h2>How it decides</h2>
     <p class="lead">Every set you log updates an estimated one-rep max for that exercise.
       Prescriptions come off the trend across recent sessions rather than a single good day, so
@@ -277,20 +284,39 @@
 
   <section>
     <h2>What it looks like</h2>
+    <!-- Real captures from the app, seeded with two weeks of training by
+         docs/store-assets/seed-screenshot-db.test.ts in the app repo — the same
+         set the store listings use, minus the store panels' frame and headline.
+         Re-export from docs/store-assets/screenshots/ when those are retaken. -->
     <div class="shots">
       <figure>
         <img src="shots/01-prescription.webp" width="560" height="996" loading="lazy" decoding="async"
-             alt="The Barbell Bench Press screen. A target of 3 sets of 3 at 80 kg, under a heading that reads WHY, with three reasons given: start with 2 in reserve and work down to 1 by set 3; a planned deload week, because work has been accumulating for several weeks; and 3 sets instead of 5 with the weight roughly held, since cutting volume is what sheds fatigue. Below it a suggested warm-up of 32.5 kg for 5, 47.5 kg for 3 and 65 kg for 2, then the weight and reps to log.">
+             alt="The Conventional Deadlift screen during a workout. Best set 130 kg for 3, estimated one-rep max 155 kg. The target reads 4 sets of 3 at 135 kg, with two reasons under it: you hit the whole prescription, so standard progression; and you are at 23.5 hard sets for this muscle group this week, past what is usually recoverable, so it trims a set. Below it a suggested warm-up of 55 kg for 5, 80 kg for 3 and 107.5 kg for 2, then the weight and reps for set 1 of 4.">
         <figcaption>The prescription, and why it is that.</figcaption>
       </figure>
       <figure>
-        <img src="shots/02-strength-trend.webp" width="560" height="996" loading="lazy" decoding="async"
-             alt="The strength trend screen: an estimated one-rep max of 100 kg with the run of sessions it was built from — 90, 92.5, 95, 95, 97.5, 100 — a predicted 8-rep max of 77.5 kg, and a strength-level bar placing the lift at Intermediate, 22.5 kg short of Advanced.">
-        <figcaption>The trend behind it, and where the lift sits.</figcaption>
+        <img src="shots/02-workout-summary.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The workout summary for Push Day: 1 hour 4 minutes, 6 lifts, 22 working sets, 95% of the plan completed (22 of 23 planned sets), and new bests on Overhead Press at 52.5 kg for 4 and Barbell Incline Bench Press at 67.5 kg for 6.">
+        <figcaption>What a session ends on.</figcaption>
       </figure>
       <figure>
-        <img src="shots/04-exercise-library.webp" width="560" height="996" loading="lazy" decoding="async"
-             alt="The exercise library: a search box, filter chips for each body part, a button to add a custom exercise, and a list of exercises each showing its muscle group, with a how-to guide and an edit control beside it.">
+        <img src="shots/03-muscle-map.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="Front and back body diagrams with the muscles a push session trained shaded by how much work each got: chest 12 sets, shoulders 11.5, triceps 9.5, core 2.">
+        <figcaption>What you actually trained.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/04-strength-level.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The Barbell Bench Press page: estimated one-rep max 97.5 kg, built from 95, 95 and 97.5, a predicted 8-rep max of 77.5 kg, and a strength-level bar from Beginner to Elite placing the lift at Intermediate, 25 kg short of Advanced.">
+        <figcaption>Where each lift stands.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/05-home.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The home screen: this week's sets by day, today's 22 sets across 6 lifts, 3 sessions and 10 new bests this month, a Start Workout button and a button to add a past workout.">
+        <figcaption>Your week, and today's session.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/06-exercise-library.webp" width="560" height="996" loading="lazy" decoding="async"
+             alt="The exercise library: a search box, filter chips for each body part, sort by name, times trained or body part, a button to add a custom exercise, and a list of exercises each showing its muscle group, with a how-to guide and an edit control beside it.">
         <figcaption>Over 200 exercises, plus your own.</figcaption>
       </figure>
     </div>
@@ -335,6 +361,7 @@
     <ul>
       <li><strong>Warm-up sets calculated</strong> before your first working set — a three-rung
         ramp onto the same plate grid, and nothing at all below a load that doesn't need one.</li>
+      <li><strong>A rest timer between sets</strong>, with an alert when it's up.</li>
       <li><strong>Over 200 exercises</strong>, with your own additions alongside them, and a
         how-to guide on every one.</li>
       <li><strong>18 routine templates</strong> — body parts, splits, or built around the
@@ -347,13 +374,89 @@
     </ul>
   </section>
 
+  <!-- LiftMax Pro. Written from the liftmax_pro branch before it ships, so
+       every claim here is something that branch already does — the feature
+       names and the free-forever line are the app's own words (PREMIUM_COPY in
+       src/premium/PremiumGate.tsx, and the paywall), and docs/premium.md is
+       the source of truth for what is in the bundle and what stays free.
+
+       Deliberately no price: the stores hold the figure and it is not public
+       until the product is live. When it ships, drop the "Coming soon" tag
+       and the hero line that repeats it; there is no other date-sensitive
+       wording in here. -->
+  <section id="pro" class="pro">
+    <p class="pro-tag">Coming soon</p>
+    <h2>LiftMax <span>Pro</span></h2>
+    <p class="lead">The free app tells you what to lift today. Pro plans the weeks ahead and
+      reads back what they did.</p>
+    <p class="lead">One payment, yours for good — no subscription. That is possible because
+      there is no server behind LiftMax: one more lifter costs nothing to run, so there is no
+      monthly bill to pass on. Buy it once and it unlocks on every device signed in to the same
+      Google Play or App Store account.</p>
+
+    <div class="pro-grid">
+      <div class="pro-card pro-card-wide">
+        <p class="pro-h">Programs</p>
+        <p class="pro-b">Run a multi-week block with every session scheduled ahead of time,
+          deload weeks included, instead of picking a routine each day. Build one yourself, or
+          answer a few questions — goal, days a week, session length, equipment, anything to
+          work around — and have it drafted for you, then change any part of it.</p>
+        <ul class="pro-points">
+          <li>Sessions are in order, not on dates — miss a week and the block waits for you
+            rather than breaking.</li>
+          <li>A check-in while it runs, and a review at the end of what the block actually
+            moved.</li>
+          <li>Finished blocks stay in Past programs, ready to run again.</li>
+        </ul>
+      </div>
+
+      <div class="pro-card pro-card-wide">
+        <p class="pro-h">MaxStats</p>
+        <p class="pro-b">Your training, read back in plain words. It opens on a verdict — how
+          many lifts are going up, and anything that needs a look — then goes as deep as you
+          want: hard sets per muscle each week against what is enough and what is too much, a
+          muscle heat map, records, consistency, how close you came to your targets, and when
+          you're on course to hit a goal.</p>
+        <p class="pro-b pro-quiet">Over any date range, and on every exercise, routine, program
+          and workout.</p>
+      </div>
+
+      <div class="pro-card">
+        <p class="pro-h">Session insights</p>
+        <p class="pro-b">While you lift: what today's fatigue is doing to each target, and which
+          sets are carrying the session.</p>
+        <p class="pro-b pro-quiet">On any workout, running or finished — and it fills in as
+          you go.</p>
+      </div>
+
+      <div class="pro-card">
+        <p class="pro-h">Routine review</p>
+        <p class="pro-b">A routine read against your own training — which lifts are moving and
+          which have stalled, what to change in the sets and reps, a swap for a lift that has
+          stopped, and which parts of a muscle the routine never reaches.</p>
+      </div>
+    </div>
+
+    <div class="free-note">
+      <p class="pro-h">What stays free</p>
+      <p class="pro-b">Logging, history, progression, backup and export stay free forever. So
+        does everything the free app already does — the reps-in-reserve calibration, your
+        personal rep-max curve, strength standards, warm-ups, the rest timer — and there is no
+        limit on exercises, routines or workouts. Pro adds to the app; it never takes anything
+        away from it.</p>
+    </div>
+  </section>
+
   <section>
     <h2>Your data stays yours</h2>
     <p class="lead">No account. No sign-up. No ads.</p>
     <p class="lead">Everything you enter — your profile, workouts, routines and history — is
       stored in a database on your own device. There is no server holding your training history,
-      because there is no server. Back up and restore to storage you control, and erase
-      everything from within the app whenever you want.</p>
+      because there is no server. Back up to your own Google Drive on Android or iCloud on
+      iPhone, so a lost or replaced phone doesn't mean starting over — encrypted if you want,
+      and only if you switch it on. Erase everything from within the app whenever you want.</p>
+    <p class="lead">Pro doesn't change any of that. The purchase is held by Google or Apple
+      against your store account; the app only asks whether that account owns it.</p>
     <p class="lead">Anonymous crash reports are sent to help fix bugs. They contain technical
       diagnostics only — never your training data. Details are in the
       <a href="privacy/">privacy policy</a>.</p>
@@ -378,6 +481,7 @@
     <nav>
       <a href="https://play.google.com/store/apps/details?id=com.liftmax.android">Google Play</a>
       <a href="https://apps.apple.com/app/liftmax/id6809827285">App Store</a>
+      <a href="#pro">LiftMax Pro</a>
       <a href="privacy/">Privacy policy</a>
       <a href="mailto:jackroberts-dev@outlook.com">Support</a>
     </nav>

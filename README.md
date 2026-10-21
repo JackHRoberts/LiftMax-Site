@@ -10,7 +10,7 @@ privacy/index.html  privacy policy  →  https://liftmax.co.uk/privacy/
 404.html            served for any missing path
 styles.css          shared by all three
 demo.js             the homepage's live prescription demo — see below
-shots/              app screenshots, webp, from the app repo's store assets
+shots/              app screenshots, webp, from the app repo's store assets — see below
 CNAME               the custom domain; deleting it unsets it in Pages
 favicon.png         196×196, from the app repo's assets/
 icon.png            1024×1024, used as the og:image
@@ -73,6 +73,22 @@ why the two sites had to merge rather than sit side by side.
   `prescribeForTarget` uses `roundToPlate`; `floorToPlate` is only for weights
   *displayed* as estimates. The site said "rounded down" in two places and was
   wrong about it; if that wording comes back, check the engine first.
+
+- **The screenshots are the store set, unframed.** `shots/` is
+  `docs/store-assets/screenshots/` from the app repo (the Android captures,
+  not the `panels/` with the headline frame), resized to 560×996 webp:
+  `cwebp -q 82 -resize 560 996 <capture>.png -o shots/<name>.webp`. Each
+  `alt` describes what that capture actually shows, numbers included, so a
+  retake means rewriting the alt text too.
+- **The Pro section describes an unreleased build.** It was written from
+  the app's `liftmax_pro` branch before Pro went on sale, and carries a
+  "Coming soon" tag plus a matching line under the store badges. When Pro
+  ships, remove both. It names no price on purpose — the stores hold it.
+  `docs/premium.md` in the app repo is the source of truth for what is in
+  the bundle and what stays free; if that list moves, this section has to.
+  Before Pro ships, the privacy policy also wants a line on purchases
+  (handled by Google and Apple; the app only learns whether the account owns
+  Pro) — and `docs/play-data-safety.md` checked against it.
 
 ## DNS
 
