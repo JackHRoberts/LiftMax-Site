@@ -21,8 +21,10 @@
   --accent-soft: rgba(198, 255, 60, 0.10);
   --accent-border: rgba(198, 255, 60, 0.35);
   --data: #3CD7FF;
-  --data-soft: rgba(60, 215, 255, 0.10);
-  --data-border: rgba(60, 215, 255, 0.35);
+  /* Pro amber — premium/premiumSoft/premiumBorder in colors.ts. */
+  --premium: #FFC53C;
+  --premium-soft: rgba(255, 197, 60, 0.12);
+  --premium-border: rgba(255, 197, 60, 0.38);
 }
 
 @media (prefers-color-scheme: light) {
@@ -41,8 +43,10 @@
     --accent-soft: rgba(76, 122, 18, 0.10);
     --accent-border: rgba(76, 122, 18, 0.35);
     --data: #0E7FA3;
-    --data-soft: rgba(14, 127, 163, 0.08);
-    --data-border: rgba(14, 127, 163, 0.35);
+    /* Deepened as in the app: neon amber on white is unreadable as text. */
+    --premium: #8A5A00;
+    --premium-soft: rgba(138, 90, 0, 0.10);
+    --premium-border: rgba(138, 90, 0, 0.35);
   }
 }
 
@@ -585,30 +589,31 @@ h3 {
 }
 
 /* ── LiftMax Pro ────────────────────────────────────────────────── */
-/* Pro gets --data, not the accent: the accent is the reward signal (see
-   the top of this file), and a product being on sale is not one. Cyan is
-   the palette's "analysis" colour, which is most of what Pro is. The
-   panel's glow is the store panels' volt glow, recoloured to match. */
+/* Pro gets --premium, the app's own amber for everything Pro (the lock
+   cards, the paywall), so the site and the app mark it the same way. Not
+   the accent: that is the reward signal (see the top of this file), and a
+   product being on sale is not one. The panel's glow is the store panels'
+   volt glow, recoloured to match. */
 .pro-panel {
   position: relative;
   overflow: hidden;
   padding: 2.25rem 1.75rem 2rem;
   margin: 0 0 1.25rem;
-  border: 1px solid var(--data-border);
+  border: 1px solid var(--premium-border);
   border-radius: 18px;
   background:
-    radial-gradient(120% 90% at 50% -10%, var(--data-soft), transparent 70%),
+    radial-gradient(120% 90% at 50% -10%, var(--premium-soft), transparent 70%),
     var(--surface);
 }
-.eyebrow-pro { color: var(--data); display: flex; align-items: center; gap: 0.75rem; }
+.eyebrow-pro { color: var(--premium); display: flex; align-items: center; gap: 0.75rem; }
 .pro-tag {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   font-weight: 600;
-  color: var(--data);
-  border: 1px solid var(--data-border);
-  background: var(--data-soft);
+  color: var(--premium);
+  border: 1px solid var(--premium-border);
+  background: var(--premium-soft);
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
 }
@@ -617,7 +622,7 @@ h3 {
   margin: 0 0 1rem;
   text-wrap: balance;
 }
-.pro-title span { color: var(--data); }
+.pro-title span { color: var(--premium); }
 .pro-lede {
   font-size: 1.1rem;
   color: var(--text-secondary);
@@ -671,14 +676,14 @@ h3 {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 10px;
-  background: var(--data-soft);
-  border: 1px solid var(--data-border);
+  background: var(--premium-soft);
+  border: 1px solid var(--premium-border);
 }
 .pro-icon svg {
   width: 1.3rem;
   height: 1.3rem;
   fill: none;
-  stroke: var(--data);
+  stroke: var(--premium);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -691,7 +696,7 @@ h3 {
 .pro-b { font-size: 0.92rem; color: var(--text-secondary); margin: 0 0 0.75rem; }
 .pro-points { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; }
 .pro-points li { margin-bottom: 0.45rem; }
-.pro-points li::marker { color: var(--data); }
+.pro-points li::marker { color: var(--premium); }
 .pro-foot {
   font-size: 0.82rem;
   color: var(--text-muted);
@@ -701,7 +706,7 @@ h3 {
 }
 
 .pro-why {
-  border-left: 2px solid var(--data);
+  border-left: 2px solid var(--premium);
   padding: 0.25rem 0 0.25rem 1.1rem;
   margin: 1.75rem 0;
   font-size: 0.95rem;
