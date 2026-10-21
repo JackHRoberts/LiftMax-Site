@@ -103,7 +103,7 @@
      places while CNAME exists — Pages 301s it to the custom domain. To
      preview before DNS is pointed, delete CNAME on a branch, or just open
      the files locally. -->
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 
@@ -228,6 +228,7 @@
   </div>
 
   <section id="how">
+    <p class="eyebrow">The engine</p>
     <h2>How it decides</h2>
     <p class="lead">Every set you log updates an estimated one-rep max for that exercise.
       Prescriptions come off the trend across recent sessions rather than a single good day, so
@@ -283,6 +284,7 @@
   </section>
 
   <section>
+    <p class="eyebrow">In the app</p>
     <h2>What it looks like</h2>
     <!-- Real captures from the app, seeded with two weeks of training by
          docs/store-assets/seed-screenshot-db.test.ts in the app repo — the same
@@ -323,6 +325,7 @@
   </section>
 
   <section>
+    <p class="eyebrow">The details</p>
     <h2>Built for the gym, not the spreadsheet</h2>
 
     <!-- The three items worth showing rather than stating. roundToPlate at
@@ -385,76 +388,120 @@
        and the hero line that repeats it; there is no other date-sensitive
        wording in here. -->
   <section id="pro" class="pro">
-    <p class="pro-tag">Coming soon</p>
-    <h2>LiftMax <span>Pro</span></h2>
-    <p class="lead">The free app tells you what to lift today. Pro plans the weeks ahead and
-      reads back what they did.</p>
-    <p class="lead">One payment, yours for good — no subscription. That is possible because
-      there is no server behind LiftMax: one more lifter costs nothing to run, so there is no
-      monthly bill to pass on. Buy it once and it unlocks on every device signed in to the same
-      Google Play or App Store account.</p>
+    <div class="pro-panel">
+      <p class="eyebrow eyebrow-pro">LiftMax Pro <span class="pro-tag">Coming soon</span></p>
+      <h2 class="pro-title">Plan the weeks ahead.<br><span>Read back what they did.</span></h2>
+      <p class="pro-lede">The free app tells you what to lift today. Pro adds the block it
+        belongs to, and an honest read on how it's going.</p>
+      <ul class="pro-terms">
+        <li>One payment</li>
+        <li>No subscription</li>
+        <li>Every device on your store account</li>
+      </ul>
+    </div>
 
     <div class="pro-grid">
-      <div class="pro-card pro-card-wide">
-        <p class="pro-h">Programs</p>
-        <p class="pro-b">Run a multi-week block with every session scheduled ahead of time,
-          deload weeks included, instead of picking a routine each day. Build one yourself, or
-          answer a few questions — goal, days a week, session length, equipment, anything to
-          work around — and have it drafted for you, then change any part of it.</p>
+      <article class="pro-card pro-card-wide">
+        <div class="pro-card-head">
+          <span class="pro-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M7.5 14h2M11 14h2M14.5 14h2M7.5 17h2"/></svg></span>
+          <div>
+            <h3 class="pro-h">Programs</h3>
+            <p class="pro-hook">A multi-week block, planned for you.</p>
+          </div>
+        </div>
         <ul class="pro-points">
-          <li>Sessions are in order, not on dates — miss a week and the block waits for you
-            rather than breaking.</li>
-          <li>A check-in while it runs, and a review at the end of what the block actually
-            moved.</li>
-          <li>Finished blocks stay in Past programs, ready to run again.</li>
+          <li>Every session scheduled ahead of time, deload weeks included — no picking a
+            routine each day.</li>
+          <li>Build it yourself, or answer a few questions — goal, days a week, session length,
+            equipment, anything to work around — and get a draft you can change.</li>
+          <li>Miss a week and the block waits for you. Sessions run in order, not on dates.</li>
+          <li>A check-in while it runs, a review at the end, and any finished block can be run
+            again.</li>
         </ul>
-      </div>
+      </article>
 
-      <div class="pro-card pro-card-wide">
-        <p class="pro-h">MaxStats</p>
-        <p class="pro-b">Your training, read back in plain words. It opens on a verdict — how
-          many lifts are going up, and anything that needs a look — then goes as deep as you
-          want: hard sets per muscle each week against what is enough and what is too much, a
-          muscle heat map, records, consistency, how close you came to your targets, and when
-          you're on course to hit a goal.</p>
-        <p class="pro-b pro-quiet">Over any date range, and on every exercise, routine, program
-          and workout.</p>
-      </div>
+      <article class="pro-card pro-card-wide">
+        <div class="pro-card-head">
+          <span class="pro-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M6.5 16v-4M11 16V8M15.5 16v-6M20 16V5"/></svg></span>
+          <div>
+            <h3 class="pro-h">MaxStats</h3>
+            <p class="pro-hook">Your training, read back in plain words.</p>
+          </div>
+        </div>
+        <ul class="pro-points">
+          <li>Opens on the verdict: how many lifts are going up, and what needs a look.</li>
+          <li>Hard sets per muscle each week, against what's enough and what's too much.</li>
+          <li>A muscle heat map, records, consistency, and how close you came to your
+            targets.</li>
+          <li>When you're on course to hit a goal.</li>
+        </ul>
+        <p class="pro-foot">Any date range — and a MaxStats tab on every exercise, routine,
+          program and workout.</p>
+      </article>
 
-      <div class="pro-card">
-        <p class="pro-h">Session insights</p>
-        <p class="pro-b">While you lift: what today's fatigue is doing to each target, and which
+      <article class="pro-card">
+        <div class="pro-card-head">
+          <span class="pro-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"/></svg></span>
+          <div>
+            <h3 class="pro-h">Session insights</h3>
+            <p class="pro-hook">What today is doing to your targets.</p>
+          </div>
+        </div>
+        <p class="pro-b">While you lift: how today's fatigue is moving each target, and which
           sets are carrying the session.</p>
-        <p class="pro-b pro-quiet">On any workout, running or finished — and it fills in as
-          you go.</p>
-      </div>
+        <p class="pro-foot">On any workout, running or finished.</p>
+      </article>
 
-      <div class="pro-card">
-        <p class="pro-h">Routine review</p>
-        <p class="pro-b">A routine read against your own training — which lifts are moving and
-          which have stalled, what to change in the sets and reps, a swap for a lift that has
-          stopped, and which parts of a muscle the routine never reaches.</p>
-      </div>
+      <article class="pro-card">
+        <div class="pro-card-head">
+          <span class="pro-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4.5V3h6v1.5"/><path d="M8.5 11l2 2 4-4M8.5 17h7"/></svg></span>
+          <div>
+            <h3 class="pro-h">Routine review</h3>
+            <p class="pro-hook">Advice, not just charts.</p>
+          </div>
+        </div>
+        <ul class="pro-points">
+          <li>Which lifts are moving, and which have stalled.</li>
+          <li>What to change in the sets and reps.</li>
+          <li>A swap for a lift that has stopped.</li>
+          <li>The parts of a muscle the routine never reaches.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="pro-why">
+      <p class="pro-why-h">Why there's no subscription</p>
+      <p>There is no server behind LiftMax, so one more lifter costs nothing to run — and
+        there is no monthly bill to pass on. Buy it once and it unlocks on every device signed
+        in to the same Google Play or App Store account.</p>
     </div>
 
     <div class="free-note">
-      <p class="pro-h">What stays free</p>
-      <p class="pro-b">Logging, history, progression, backup and export stay free forever. So
-        does everything the free app already does — the reps-in-reserve calibration, your
-        personal rep-max curve, strength standards, warm-ups, the rest timer — and there is no
-        limit on exercises, routines or workouts. Pro adds to the app; it never takes anything
-        away from it.</p>
+      <h3 class="free-h">Free forever, Pro or not</h3>
+      <ul class="checks">
+        <li>Logging and history</li>
+        <li>Progression, every session</li>
+        <li>Backup and export</li>
+        <li>Reps-in-reserve calibration</li>
+        <li>Your personal rep-max curve</li>
+        <li>Strength standards</li>
+        <li>Warm-ups and the rest timer</li>
+        <li>No limit on exercises, routines or workouts</li>
+      </ul>
+      <p class="free-foot">Pro adds to the app. It never takes anything away from it.</p>
     </div>
   </section>
 
   <section>
+    <p class="eyebrow">Privacy</p>
     <h2>Your data stays yours</h2>
-    <p class="lead">No account. No sign-up. No ads.</p>
+    <p class="statement">No account. No sign-up. No ads.</p>
     <p class="lead">Everything you enter — your profile, workouts, routines and history — is
       stored in a database on your own device. There is no server holding your training history,
-      because there is no server. Back up to your own Google Drive on Android or iCloud on
-      iPhone, so a lost or replaced phone doesn't mean starting over — encrypted if you want,
-      and only if you switch it on. Erase everything from within the app whenever you want.</p>
+      because there is no server.</p>
+    <p class="lead">Back up to your own Google Drive on Android or iCloud on iPhone, so a lost or
+      replaced phone doesn't mean starting over — encrypted if you want, and only if you switch
+      it on. Erase everything from within the app whenever you want.</p>
     <p class="lead">Pro doesn't change any of that. The purchase is held by Google or Apple
       against your store account; the app only asks whether that account owns it.</p>
     <p class="lead">Anonymous crash reports are sent to help fix bugs. They contain technical
@@ -463,14 +510,15 @@
   </section>
 
   <section id="support">
+    <p class="eyebrow">Get in touch</p>
     <h2>Support</h2>
     <div class="support">
-      <p class="lead" style="margin-bottom:0.75rem">Questions, bug reports and feature requests
-        all go to one inbox, and a person reads them.</p>
+      <p class="lead">Questions, bug reports and feature requests all go to one inbox, and a
+        person reads them.</p>
       <p class="email"><a href="mailto:jackroberts-dev@outlook.com">jackroberts-dev@outlook.com</a></p>
-      <p class="lead" style="margin:0.75rem 0 0; font-size:0.9rem">If you're reporting a bug, the
-        Contact Us button in the app's Settings fills in your build number automatically — that
-        makes it much easier to track down.</p>
+      <p class="support-note">If you're reporting a bug, the Contact Us button in the app's
+        Settings fills in your build number automatically — that makes it much easier to track
+        down.</p>
     </div>
   </section>
 
@@ -485,7 +533,7 @@
       <a href="privacy/">Privacy policy</a>
       <a href="mailto:jackroberts-dev@outlook.com">Support</a>
     </nav>
-    <p style="margin:0">LiftMax</p>
+    <p class="footer-name">LiftMax</p>
   </div>
 </footer>
 

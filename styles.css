@@ -21,6 +21,8 @@
   --accent-soft: rgba(198, 255, 60, 0.10);
   --accent-border: rgba(198, 255, 60, 0.35);
   --data: #3CD7FF;
+  --data-soft: rgba(60, 215, 255, 0.10);
+  --data-border: rgba(60, 215, 255, 0.35);
 }
 
 @media (prefers-color-scheme: light) {
@@ -39,6 +41,8 @@
     --accent-soft: rgba(76, 122, 18, 0.10);
     --accent-border: rgba(76, 122, 18, 0.35);
     --data: #0E7FA3;
+    --data-soft: rgba(14, 127, 163, 0.08);
+    --data-border: rgba(14, 127, 163, 0.35);
   }
 }
 
@@ -164,8 +168,31 @@ section { padding: 3rem 0; border-top: 1px solid var(--border); }
 section:first-of-type { border-top: 0; }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: clamp(1.6rem, 4.5vw, 2rem);
   font-weight: 700;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+/* The small label over each section's heading — the same device as the
+   store panels' "EVERY SESSION" line, so the site and the listing read as
+   one thing. Muted rather than volt: the accent is spent elsewhere. */
+.eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  margin: 0 0 0.6rem;
+}
+
+/* A one-line claim that should land before the paragraph explaining it. */
+.statement {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0 0 1.25rem;
 }
 p { margin: 0 0 1rem; }
@@ -192,6 +219,8 @@ a:hover { text-decoration-color: var(--accent); }
   border-radius: 14px;
   padding: 1.5rem;
 }
+.support .lead { margin-bottom: 0.75rem; }
+.support-note { font-size: 0.9rem; color: var(--text-secondary); margin: 0.75rem 0 0; }
 .email {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.95rem;
@@ -220,6 +249,7 @@ footer {
   color: var(--text-muted);
 }
 footer a { color: var(--text-secondary); }
+footer .footer-name { margin: 0; }
 footer nav { margin-bottom: 0.75rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
 
 @media (max-width: 30rem) {
@@ -239,7 +269,7 @@ footer nav { margin-bottom: 0.75rem; display: flex; gap: 1.25rem; flex-wrap: wra
 
 h3 {
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 2rem 0 0.75rem;
@@ -557,51 +587,163 @@ h3 {
 /* ── LiftMax Pro ────────────────────────────────────────────────── */
 /* Pro gets --data, not the accent: the accent is the reward signal (see
    the top of this file), and a product being on sale is not one. Cyan is
-   the palette's "analysis" colour, which is most of what Pro is. */
-.pro h2 span { color: var(--data); }
+   the palette's "analysis" colour, which is most of what Pro is. The
+   panel's glow is the store panels' volt glow, recoloured to match. */
+.pro-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 2.25rem 1.75rem 2rem;
+  margin: 0 0 1.25rem;
+  border: 1px solid var(--data-border);
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 90% at 50% -10%, var(--data-soft), transparent 70%),
+    var(--surface);
+}
+.eyebrow-pro { color: var(--data); display: flex; align-items: center; gap: 0.75rem; }
 .pro-tag {
-  display: inline-block;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
   font-weight: 600;
   color: var(--data);
-  border: 1px solid var(--data);
+  border: 1px solid var(--data-border);
+  background: var(--data-soft);
   border-radius: 999px;
-  padding: 0.1rem 0.6rem;
-  margin: 0 0 0.9rem;
+  padding: 0.15rem 0.6rem;
 }
+.pro .pro-title {
+  font-size: clamp(1.9rem, 5.5vw, 2.6rem);
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+.pro-title span { color: var(--data); }
+.pro-lede {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 34rem;
+  margin: 0 0 1.5rem;
+}
+.pro-terms {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.pro-terms li {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+}
+
 .pro-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  margin: 1.75rem 0 1rem;
+  margin: 0 0 1.25rem;
 }
 .pro-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 1.25rem;
+  padding: 1.4rem 1.5rem;
 }
 /* Programs (the headline) and MaxStats (the most to say) take a full row
    each; the two in-context features share the last one. */
 .pro-card-wide { grid-column: 1 / -1; }
-.pro-h {
-  font-family: 'Space Grotesk', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  margin: 0 0 0.5rem;
+.pro-card-head {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  margin: 0 0 1rem;
 }
-.pro-b { font-size: 0.9rem; color: var(--text-secondary); margin: 0 0 0.75rem; }
-.pro-b:last-child { margin-bottom: 0; }
-.pro-quiet { font-size: 0.82rem; color: var(--text-muted); }
-.pro-points { margin: 0; font-size: 0.88rem; }
-.pro-points li { margin-bottom: 0.35rem; }
+.pro-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  background: var(--data-soft);
+  border: 1px solid var(--data-border);
+}
+.pro-icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: var(--data);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pro .pro-h {
+  font-size: 1.2rem;
+  margin: 0.05rem 0 0.15rem;
+}
+.pro-hook { color: var(--text); font-weight: 500; margin: 0; line-height: 1.4; }
+.pro-b { font-size: 0.92rem; color: var(--text-secondary); margin: 0 0 0.75rem; }
+.pro-points { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; }
+.pro-points li { margin-bottom: 0.45rem; }
+.pro-points li::marker { color: var(--data); }
+.pro-foot {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.9rem 0 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.pro-why {
+  border-left: 2px solid var(--data);
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  margin: 1.75rem 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+.pro-why-h { font-weight: 600; color: var(--text); margin: 0 0 0.35rem; }
+
 .free-note {
-  border: 1px dashed var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 1.25rem;
+  padding: 1.4rem 1.5rem;
 }
+.free-note .free-h { margin: 0 0 1rem; font-size: 1.1rem; }
+.checks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1.5rem;
+}
+.checks li {
+  margin: 0;
+  font-size: 0.92rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+/* A drawn tick in the muted text colour: these are promises, not rewards,
+   so they stay off the accent too. */
+.checks li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.3rem;
+  width: 0.7rem;
+  height: 0.4rem;
+  border-left: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--text-secondary);
+  transform: rotate(-45deg);
+}
+.free-foot { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
 
 /* ── Narrow screens ─────────────────────────────────────────────── */
 @media (max-width: 46rem) {
@@ -619,6 +761,8 @@ h3 {
   }
   .shots figure { flex: 0 0 62%; max-width: 15rem; scroll-snap-align: start; }
   .pro-grid { grid-template-columns: 1fr; }
+  .checks { grid-template-columns: 1fr; }
+  .pro-panel { padding: 1.75rem 1.25rem 1.5rem; }
   .insets { grid-template-columns: 1fr; }
   .demo-working { grid-template-columns: 1fr; }
 }
