@@ -255,6 +255,13 @@ footer {
 footer a { color: var(--text-secondary); }
 footer .footer-name { margin: 0; }
 footer nav { margin-bottom: 0.75rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+/* The same handle on all three, said once at the end rather than three times.
+   Marks in the link colour, not the platforms' own: they sit in a footer, and
+   the accent is kept for the app. */
+footer .footer-social { align-items: center; }
+footer .footer-social a { display: inline-flex; align-items: center; gap: 0.4rem; }
+footer .footer-social svg { height: 1.05em; width: auto; flex: none; }
+footer .footer-handle { color: var(--text-muted); }
 
 @media (max-width: 30rem) {
   body { font-size: 16px; }
