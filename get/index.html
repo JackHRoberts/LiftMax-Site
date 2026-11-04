@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get LiftMax</title>
+<meta name="description" content="LiftMax on the App Store and Google Play.">
+<meta name="theme-color" content="#0B0D0E">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.png" type="image/png">
+
+<!-- The one link for bios and posts: liftmax.co.uk/get sends a phone straight to
+     its own store, and anything else (a desktop, an unrecognised browser, or a
+     redirect the in-app browser refused) sees both badges below. Pages has no
+     server-side redirects, so the choice is made here, before the page draws.
+
+     ?from=instagram (or any short tag) is passed to Play as the install
+     referrer, so Play Console's acquisition report can tell the sources apart.
+     App Store campaign links also need the account's provider token, so iOS
+     gets the plain listing for now. -->
+<script>
+(function () {
+  var ua = navigator.userAgent || '';
+  var from = (new URLSearchParams(location.search).get('from') || '').replace(/[^\w-]/g, '').slice(0, 40);
+  var play = 'https://play.google.com/store/apps/details?id=com.liftmax.android'
+    + (from ? '&referrer=' + encodeURIComponent('utm_source=' + from + '&utm_medium=social') : '');
+  var apple = 'https://apps.apple.com/app/liftmax/id6809827285';
+  // iPadOS reports itself as a Mac; a touch screen gives it away.
+  var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/.test(ua);
+  if (ios) location.replace(apple);
+  else if (android) location.replace(play);
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="/">Lift<span>Max</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Get LiftMax</h1>
+    <p>Tells you what to lift next, based on what you actually lifted last. Free to download,
+      with no account and no ads.</p>
+    <div class="get">
+      <a class="store store-play" href="https://play.google.com/store/apps/details?id=com.liftmax.android">
+        <img src="/badges/google-play.png" alt="Get it on Google Play" width="646" height="250">
+      </a>
+      <a class="store store-apple" href="https://apps.apple.com/app/liftmax/id6809827285">
+        <img src="/badges/app-store.svg" alt="Download on the App Store" width="120" height="40">
+      </a>
+    </div>
+    <p class="hero-note"><a href="/">More about LiftMax</a></p>
+  </div>
+</main>
+
+</body>
+</html>
