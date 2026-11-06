@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A LiftMax routine</title>
+<meta name="description" content="A routine shared from LiftMax.">
+<meta name="theme-color" content="#0B0D0E">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.png" type="image/png">
+
+<!-- Where a shared routine link lands when LiftMax isn't installed, or when the
+     tapping app's own browser keeps the link instead of opening the app (Instagram's
+     often does). The routine is in the link after the '#', which the browser never
+     sends to this server: it is decoded here, on the phone, and nothing is stored.
+
+     Same format as the app's src/lib/routineLink.ts — #<version>.<base64url JSON> —
+     and read the same way: a version newer than this page knows says so, anything
+     else that doesn't parse is "not a LiftMax routine". Change one, change both. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .routine { list-style: none; margin: 1.5rem 0 2rem; padding: 0; }
+  .routine li {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+  }
+  .routine .plan { color: var(--text-secondary); white-space: nowrap; }
+  .open-app {
+    display: inline-block; margin: 0.5rem 0 1.5rem; padding: 0.9rem 1.4rem;
+    border-radius: 12px; background: var(--accent); color: var(--accent-text);
+    font-weight: 600; text-decoration: none;
+  }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="/">Lift<span>Max</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1 id="title">A LiftMax routine</h1>
+    <p id="lede">Someone shared a routine with you. Add it in LiftMax and it is priced from your
+      own training: the sets and reps are theirs, the weights are yours.</p>
+    <ul class="routine" id="routine" hidden></ul>
+    <a class="open-app" id="open" hidden>Open in LiftMax</a>
+    <p class="hero-note" id="after">No LiftMax yet? Get it below, then come back and tap the link
+      again to add the routine.</p>
+    <div class="get">
+      <a class="store store-play" href="https://play.google.com/store/apps/details?id=com.liftmax.android">
+        <img src="/badges/google-play.png" alt="Get it on Google Play" width="646" height="250">
+      </a>
+      <a class="store store-apple" href="https://apps.apple.com/app/liftmax/id6809827285">
+        <img src="/badges/app-store.svg" alt="Download on the App Store" width="120" height="40">
+      </a>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var VERSION = 1;
+  var hash = location.hash.slice(1);
+  var title = document.getElementById('title');
+  var lede = document.getElementById('lede');
+
+  function fail(newer) {
+    title.textContent = newer ? 'Open this in the LiftMax app' : "This link isn't a LiftMax routine";
+    lede.textContent = newer
+      ? 'It was shared from a newer version of LiftMax than this page knows. Open it in the app.'
+      : 'It may have been cut short when it was copied. Ask for the link again.';
+  }
+
+  function decode(text) {
+    var b64 = text.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    var binary = atob(b64);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+
+  function time(seconds) {
+    if (seconds < 60) return seconds + 's';
+    var m = Math.floor(seconds / 60), s = seconds % 60;
+    return s ? m + 'm ' + s + 's' : m + 'm';
+  }
+
+  var dot = hash.indexOf('.');
+  var version = dot > 0 ? Number(hash.slice(0, dot)) : NaN;
+  if (!(version >= 1)) return fail(false);
+  if (version > VERSION) return fail(true);
+
+  var routine;
+  try { routine = decode(hash.slice(dot + 1)); } catch (e) { return fail(false); }
+  if (!routine || typeof routine.n !== 'string' || !Array.isArray(routine.e) || !routine.e.length) {
+    return fail(false);
+  }
+
+  title.textContent = routine.n;
+  var list = document.getElementById('routine');
+  routine.e.forEach(function (slot) {
+    if (!slot || typeof slot.x !== 'string') return;
+    var li = document.createElement('li');
+    var name = document.createElement('span');
+    name.textContent = slot.x;
+    var plan = document.createElement('span');
+    plan.className = 'plan';
+    var work = slot.r ? String(slot.r) : time(slot.d || 0);
+    plan.textContent = slot.s > 1 || slot.r ? slot.s + ' × ' + work : work;
+    li.appendChild(name);
+    li.appendChild(plan);
+    list.appendChild(li);
+  });
+  list.hidden = false;
+
+  // For an app's own browser that kept the link rather than opening LiftMax.
+  var open = document.getElementById('open');
+  open.href = 'liftmax://r#' + hash;
+  open.hidden = false;
+})();
+</script>
+
+</body>
+</html>

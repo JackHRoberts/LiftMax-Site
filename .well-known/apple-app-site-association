@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["4J328WQX5V.com.liftmax.ios"],
+        "components": [
+          { "/": "/r", "comment": "A shared routine: the routine itself is after the #" }
+        ]
+      }
+    ]
+  }
+}
