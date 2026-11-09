@@ -1,0 +1,14 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.liftmax.android",
+      "sha256_cert_fingerprints": [
+        "C2:F3:74:5E:62:EF:EF:5B:38:1F:0D:14:51:77:B2:23:D9:B6:36:72:4A:6B:2C:28:09:9F:20:F2:EB:9D:5B:6E",
+        "B6:40:AA:A8:EB:73:69:07:94:86:86:12:EF:DF:E1:2E:C6:7C:F2:09:C5:62:C9:0A:9A:A7:C5:F7:3C:21:EB:09",
+        "C4:D0:49:14:3D:B1:B9:60:95:07:AE:F8:64:53:4F:35:A8:25:4B:D4:29:BF:A3:B3:63:CC:21:6D:85:38:2E:AC"
+      ]
+    }
+  }
+]
