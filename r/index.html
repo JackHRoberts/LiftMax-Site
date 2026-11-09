@@ -14,7 +14,8 @@
      often does). The routine is in the link after the '#', which the browser never
      sends to this server: it is decoded here, on the phone, and nothing is stored.
 
-     Same format as the app's src/lib/routineLink.ts — #<version>.<base64url JSON> —
+     Same format as the app's src/lib/routineLink.ts — #2.<name>~<slot>…, or the older
+     #1.<base64url JSON> —
      and read the same way: a version newer than this page knows says so, anything
      else that doesn't parse is "not a LiftMax routine". Change one, change both. -->
 
@@ -67,7 +68,12 @@
 
 <script>
 (function () {
-  var VERSION = 1;
+  var VERSION = 2;
+
+  // Version 2's codes: positions in the app's src/lib/routineLinkCodes.ts,
+  // which is append-only. Change one, change both. A custom exercise's muscle
+  // and equipment codes are not read here; only its name and plan are shown.
+  var EXERCISES = ["Barbell Bench Press", "Barbell Incline Bench Press", "Barbell Decline Bench Press", "Dumbbell Bench Press", "Dumbbell Incline Bench Press", "Dumbbell Decline Bench Press", "Barbell Floor Press", "Dumbbell Floor Press", "Dumbbell Fly", "Dumbbell Pullover", "Incline Dumbbell Fly", "Cable Fly", "High-to-Low Cable Fly", "Low-to-High Cable Fly", "Cable Chest Press", "Pec Deck Machine", "Chest Press Machine", "Incline Chest Press Machine", "Decline Chest Press Machine", "Smith Machine Bench Press", "Smith Machine Incline Bench Press", "Push-Up", "Incline Push-Up", "Decline Push-Up", "Chest Dip", "Conventional Deadlift", "Sumo Deadlift", "Trap Bar Deadlift", "Deficit Deadlift", "Rack Pull", "Barbell Row", "Underhand Barbell Row", "Pendlay Row", "Seal Row", "T-Bar Row", "Meadows Row", "Chest-Supported Row Machine", "Machine Row", "T-Bar Row Machine", "Close Grip Seated Cable Row", "Wide Grip Seated Cable Row", "Single-Arm Cable Row", "Single-Arm Dumbbell Row", "Chest-Supported Dumbbell Row", "Kettlebell Single-Arm Row", "Inverted Row", "Pull-Up", "Chin-Up", "Neutral-Grip Pull-Up", "Lat Pulldown", "Close-Grip Lat Pulldown", "Wide-Grip Lat Pulldown", "Neutral-Grip Lat Pulldown", "Straight-Arm Pulldown", "Cable Pullover", "Machine Pullover", "Back Extension", "Reverse Hyperextension", "Barbell Back Squat", "Barbell Front Squat", "Barbell Box Squat", "Barbell Pause Squat", "Barbell Walking Lunge", "Smith Machine Squat", "Leg Press", "Single-Leg Leg Press", "Hack Squat Machine", "Belt Squat Machine", "Leg Extension Machine", "Bulgarian Split Squat", "Dumbbell Walking Lunge", "Dumbbell Reverse Lunge", "Dumbbell Step-Up", "Goblet Squat", "Kettlebell Front Squat", "Sissy Squat", "Wall Sit", "Barbell Romanian Deadlift", "Barbell Stiff-Leg Deadlift", "Good Morning", "Smith Machine Romanian Deadlift", "Dumbbell Romanian Deadlift", "Single-Leg Romanian Deadlift", "Kettlebell Romanian Deadlift", "Seated Leg Curl Machine", "Lying Leg Curl Machine", "Standing Leg Curl Machine", "Glute Ham Raise", "Nordic Hamstring Curl", "Single-Leg Glute Bridge", "Slider Hamstring Curl", "Bodyweight Single-Leg Romanian Deadlift", "Barbell Hip Thrust", "Barbell Glute Bridge", "Smith Machine Hip Thrust", "Dumbbell Hip Thrust", "Machine Hip Thrust", "Cable Pull-Through", "Cable Glute Kickback", "Glute Kickback Machine", "Hip Abduction Machine", "Hip Adduction Machine", "Cable Hip Abduction", "Kettlebell Swing", "Glute Bridge", "Single-Leg Hip Thrust", "Overhead Press", "Seated Barbell Overhead Press", "Barbell Push Press", "Landmine Press", "Barbell Upright Row", "Smith Machine Overhead Press", "Dumbbell Shoulder Press", "Single-Arm Dumbbell Shoulder Press", "Arnold Press", "Dumbbell Lateral Raise", "Dumbbell Front Raise", "Dumbbell Upright Row", "Dumbbell Rear Delt Fly", "Seated Machine Shoulder Press", "Machine Lateral Raise", "Reverse Pec Deck", "Cable Lateral Raise", "Cable Front Raise", "Cable Upright Row", "Cable Face Pull", "Cable Rear Delt Fly", "Kettlebell Shoulder Press", "Barbell Shrug", "Trap Bar Shrug", "Dumbbell Shrug", "Cable Shrug", "Smith Machine Shrug", "Machine Shrug", "Prone Dumbbell Y-Raise", "Barbell Curl", "Barbell Preacher Curl", "EZ-Bar Curl", "EZ-Bar Preacher Curl", "EZ-Bar Reverse Curl", "Dumbbell Bicep Curl", "Dumbbell Hammer Curl", "Cross-Body Hammer Curl", "Dumbbell Zottman Curl", "Dumbbell Incline Curl", "Dumbbell Spider Curl", "Dumbbell Preacher Curl", "Dumbbell Concentration Curl", "Cable Curl", "Cable Rope Hammer Curl", "Machine Bicep Curl", "Barbell Close-Grip Bench Press", "Smith Machine Close-Grip Bench Press", "EZ-Bar Skull Crusher", "Dumbbell Skull Crusher", "Dumbbell Overhead Triceps Extension", "Dumbbell Triceps Kickback", "Cable Triceps Pushdown", "Cable Rope Triceps Pushdown", "Cable Overhead Triceps Extension", "Cable Triceps Kickback", "Machine Triceps Extension", "Machine Dip", "Triceps Dip", "Bench Dip", "Diamond Push-Up", "Barbell Wrist Curl", "Barbell Reverse Wrist Curl", "Dumbbell Wrist Curl", "Dumbbell Reverse Wrist Curl", "Farmer's Carry", "Kettlebell Farmer's Carry", "Barbell Static Hold", "Dead Hang", "Standing Calf Raise Machine", "Seated Calf Raise Machine", "Leg Press Calf Raise", "Donkey Calf Raise Machine", "Smith Machine Calf Raise", "Barbell Calf Raise", "Dumbbell Calf Raise", "Seated Dumbbell Calf Raise", "Single-Leg Calf Raise", "Cable Crunch", "Cable Woodchopper", "Cable Pallof Press", "Machine Crunch", "Hanging Leg Raise", "Hanging Knee Raise", "Lying Leg Raise", "Reverse Crunch", "Ab Wheel Rollout", "Decline Sit-Up", "Bicycle Crunch", "Dead Bug", "Plank", "Side Plank", "Hollow Body Hold", "Weighted Sit-Up", "Dumbbell Side Bend", "Dumbbell Suitcase Carry", "Kettlebell Russian Twist", "Barbell Power Clean", "Barbell Clean", "Barbell Hang Clean", "Barbell Snatch", "Barbell Power Snatch", "Barbell Push Jerk", "Barbell Thruster", "Dumbbell Thruster", "Kettlebell Goblet Thruster", "Kettlebell Clean and Press", "Kettlebell Snatch", "Kettlebell Turkish Get-Up", "Burpee", "Rowing Machine", "Ski Erg", "Stationary Bike", "Treadmill Run", "Treadmill Incline Walk", "Elliptical", "Stair Climber", "Sled Push", "Battle Ropes", "Jump Rope", "Outdoor Run", "Brisk Walk"];
   var hash = location.hash.slice(1);
   var title = document.getElementById('title');
   var lede = document.getElementById('lede');
@@ -77,6 +83,27 @@
     lede.textContent = newer
       ? 'It was shared from a newer version of LiftMax than this page knows. Open it in the app.'
       : 'It may have been cut short when it was copied. Ask for the link again.';
+  }
+
+  function decodeName(text) {
+    return decodeURIComponent(text.replace(/_/g, '%20'));
+  }
+
+  // Version 2 into version 1's shape: { n, e: [{ x, s, r, d }] }.
+  function decodeV2(text) {
+    var parts = text.split('~');
+    if (parts.length < 2) throw new Error('no slots');
+    return {
+      n: decodeName(parts[0]),
+      e: parts.slice(1).map(function (part) {
+        var f = part.split('.');
+        var x;
+        if (f[0].charAt(0) === '!' || f[0].charAt(0) === '-') x = decodeName(f[0].slice(1));
+        else x = EXERCISES[parseInt(f[0], 36)];
+        if (typeof x !== 'string') throw new Error('unknown exercise');
+        return { x: x, s: Number(f[1]), r: Number(f[2]) || 0, d: Number(f[3]) || 0 };
+      })
+    };
   }
 
   function decode(text) {
@@ -100,7 +127,9 @@
   if (version > VERSION) return fail(true);
 
   var routine;
-  try { routine = decode(hash.slice(dot + 1)); } catch (e) { return fail(false); }
+  try {
+    routine = version === 1 ? decode(hash.slice(dot + 1)) : decodeV2(hash.slice(dot + 1));
+  } catch (e) { return fail(false); }
   if (!routine || typeof routine.n !== 'string' || !Array.isArray(routine.e) || !routine.e.length) {
     return fail(false);
   }
